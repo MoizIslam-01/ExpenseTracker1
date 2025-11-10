@@ -1,13 +1,12 @@
 FROM node:20
 
 WORKDIR /usr/src/app
-COPY package*.json ./
-RUN npm install
 
+# Copy everything including dist folder
 COPY . .
 
-# Build the Vite app
-RUN npm run build
+# Expose port
+EXPOSE 3000
 
-# Serve built app on container startup
+# Start Vite preview
 CMD ["npm", "run", "start"]
