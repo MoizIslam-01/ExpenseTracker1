@@ -24,7 +24,7 @@ RUN npm install -g serve
 # Copy built files from previous stage
 COPY --from=build /usr/src/app/dist ./dist
 
-# Expose port
+# Expose port and check 
 EXPOSE 8081
 
 # Command to run the app
