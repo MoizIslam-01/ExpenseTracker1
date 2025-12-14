@@ -33,6 +33,26 @@ pipeline {
     post {
         always {
             sh 'docker-compose down || true'
+
+            emailext (
+                subject: "Jenkins Pipeline Result: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: """
+Hello,
+
+The Jenkins pipeline has completed.
+
+Job Name: ${env.JOB_NAME}
+Build Number: ${env.BUILD_NUMBER}
+Build Status: ${currentBuild.currentResult}
+
+You can view details here:
+${env.BUILD_URL}
+
+Regards,
+Jenkins
+""",
+                to: "aimankhanniazi16@gmail.com"
+            )
         }
     }
 }
